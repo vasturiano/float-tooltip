@@ -1,0 +1,25 @@
+<head>
+  <script src="//unpkg.com/float-tooltip"></script>
+<!--  <script src="../../dist/float-tooltip.js"></script>-->
+
+  <style>
+    body { margin: 0 }
+
+    #main-canvas {
+      width: 100%;
+      height: 100%;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+  <div id="main-canvas"></div>
+
+  <script>
+    const tooltip = Tooltip();
+
+    tooltip(document.getElementById('main-canvas'));
+
+    tooltip.content('Hello Tooltip!');
+  </script>
+</body>
