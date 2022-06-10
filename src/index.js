@@ -16,7 +16,10 @@ export default Kapsule({
     state.tooltipEl = el.append('div')
       .attr('class', 'tooltip');
 
+    state.mouseInside = false;
     el.on('mousemove.tooltip', function(ev) {
+      state.mouseInside = true;
+
       const mousePos = d3Pointer(ev);
 
       const domNode = el.node();
@@ -32,10 +35,19 @@ export default Kapsule({
           canvasHeight - mousePos[1] < 100 ? 'calc(-100% - 6px)' : '21px'
         })`);
     });
+
+    el.on('mouseover.tooltip', () => {
+      state.mouseInside = true;
+      state.content && state.tooltipEl.style('display', 'inline')
+    });
+    el.on('mouseout.tooltip', () => {
+      state.mouseInside = false;
+      state.tooltipEl.style('display', 'none')
+    });
   },
 
   update: function(state) {
-    state.tooltipEl.style('display', !!state.content ? 'inline' : 'none');
+    state.tooltipEl.style('display', !!state.content && state.mouseInside ? 'inline' : 'none');
     state.tooltipEl.html(state.content || '');
   }
 });
