@@ -12,11 +12,7 @@ A floating tooltip JS component.
 ```js
 import Tooltip from 'float-tooltip';
 ```
-or
-```js
-const Tooltip = require('float-tooltip');
-```
-or even
+or using a *script* tag
 ```html
 <script src="//unpkg.com/float-tooltip"></script>
 ```
