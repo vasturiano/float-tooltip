@@ -1,6 +1,6 @@
 {
   "name": "float-tooltip",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Floating tooltip component",
   "license": "MIT",
   "type": "module",
