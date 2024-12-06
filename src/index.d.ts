@@ -1,12 +1,8 @@
-export interface TooltipGenericInstance<ChainableInstance> {
-  (element: HTMLElement): ChainableInstance;
+declare class Tooltip {
+  constructor(element: HTMLElement);
 
   content(): string | boolean;
-  content(content: string | boolean): ChainableInstance;
+  content(content: string | boolean): Tooltip;
 }
-
-export type TooltipInstance = TooltipGenericInstance<TooltipInstance>;
-
-declare function Tooltip(): TooltipInstance;
 
 export default Tooltip;
