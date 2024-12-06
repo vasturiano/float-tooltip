@@ -18,9 +18,7 @@ or using a *script* tag
 ```
 then
 ```js
-const myTooltip = Tooltip();
-myTooltip
-  (<triggerDOMElement>)
+const myTooltip = new Tooltip(<triggerDOMElement>)
   .content('<div>Hello World!</div>');
 ```
 

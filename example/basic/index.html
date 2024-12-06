@@ -17,9 +17,7 @@
   <div id="main-canvas"></div>
 
   <script>
-    const tooltip = Tooltip();
-
-    tooltip(document.getElementById('main-canvas'));
+    const tooltip = new Tooltip(document.getElementById('main-canvas'));
 
     tooltip.content('Hello Tooltip!');
   </script>
