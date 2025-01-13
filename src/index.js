@@ -9,12 +9,17 @@ export default Kapsule({
     content: { default: false }
   },
 
-  init: function(domNode, state) {
+  init: function(domNode, state, { style = {}} = {}) {
     const isD3Selection = !!domNode && typeof domNode === 'object' && !!domNode.node && typeof domNode.node === 'function';
     const el = d3Select(isD3Selection ? domNode.node() : domNode);
 
     state.tooltipEl = el.append('div')
-      .attr('class', 'tooltip');
+      .attr('class', 'float-tooltip-kap');
+
+    Object.entries(style).forEach(([k, v]) => state.tooltipEl.style(k, v));
+    state.tooltipEl // start off-screen
+      .style('left', '-100000px')
+      .style('display', 'none');
 
     state.mouseInside = false;
     el.on('mousemove.tooltip', function(ev) {

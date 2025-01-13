@@ -24,6 +24,19 @@ const myTooltip = new Tooltip(<triggerDOMElement>)
 
 ## API reference
 
+### Initialisation
+
+```js
+new Tooltip(<containerDomElement>, { configOptions })
+```
+
+| Config options | Description | Default |
+| --- | --- | :--: |
+| <b>style</b>: <i>object</i> | A custom style object apply to the tooltip and override the default style. | - |
+
+
+### Methods
+
 | Method | Description | Default |
 | --- | --- | --- |
 | <b>content</b>([<i>string</i>]) | Specify the content of the tooltip. Supports plain text or HTML content. If a falsy value is supplied the tooltip will automatically hide. | `false` |
