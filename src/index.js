@@ -18,7 +18,7 @@ export default Kapsule({
 
     Object.entries(style).forEach(([k, v]) => state.tooltipEl.style(k, v));
     state.tooltipEl // start off-screen
-      .style('left', '-100000px')
+      .style('left', '-10000px')
       .style('display', 'none');
 
     state.mouseInside = false;
@@ -37,7 +37,7 @@ export default Kapsule({
         // adjust horizontal position to not exceed canvas boundaries
         .style('transform', `translate(-${mousePos[0] / canvasWidth * 100}%, ${
           // flip to above if near bottom
-          canvasHeight - mousePos[1] < 100 ? 'calc(-100% - 6px)' : '21px'
+          canvasHeight > 130 && (canvasHeight - mousePos[1] < 100) ? 'calc(-100% - 6px)' : '21px'
         })`);
     });
 
