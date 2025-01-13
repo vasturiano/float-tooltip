@@ -13,6 +13,9 @@ export default Kapsule({
     const isD3Selection = !!domNode && typeof domNode === 'object' && !!domNode.node && typeof domNode.node === 'function';
     const el = d3Select(isD3Selection ? domNode.node() : domNode);
 
+    // make sure container is positioned, to provide anchor for tooltip
+    el.style('position') === 'static' && el.style('position', 'relative');
+
     state.tooltipEl = el.append('div')
       .attr('class', 'float-tooltip-kap');
 
