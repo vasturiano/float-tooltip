@@ -1,5 +1,6 @@
 .float-tooltip-kap {
   position: absolute;
+  width: max-content; /* prevent shrinking near right edge */
   padding: 3px 5px;
   border-radius: 3px;
   font: 12px sans-serif;
