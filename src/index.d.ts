@@ -6,7 +6,7 @@ declare class Tooltip {
   constructor(element: HTMLElement, configOptions?: ConfigOptions);
 
   content(): string | boolean;
-  content(content: string | boolean): Tooltip;
+  content(content: HTMLElement | string | boolean | null): Tooltip;
 }
 
 export default Tooltip;

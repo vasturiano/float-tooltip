@@ -56,6 +56,12 @@ export default Kapsule({
 
   update: function(state) {
     state.tooltipEl.style('display', !!state.content && state.mouseInside ? 'inline' : 'none');
-    state.tooltipEl.html(state.content || '');
+
+    if (state.content instanceof HTMLElement) {
+      state.tooltipEl.text(''); // empty it
+      state.tooltipEl.append(() => state.content);
+    } else {
+      state.tooltipEl.html(state.content || '');
+    }
   }
 });
