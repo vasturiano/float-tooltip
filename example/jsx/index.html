@@ -1,0 +1,27 @@
+<head>
+  <script src="//unpkg.com/float-tooltip"></script>
+<!--  <script src="../../dist/float-tooltip.js" defer></script>-->
+
+  <style>
+    body { margin: 0 }
+
+    #main-canvas {
+      width: 50%;
+      height: 50%;
+      background-color: pink;
+      transform: translate(50%, 50%);
+    }
+  </style>
+</head>
+<body>
+  <div id="main-canvas"></div>
+
+  <script src="//unpkg.com/@babel/standalone"></script>
+  <script type="text/jsx" data-type="module">
+    import React from 'https://esm.sh/react';
+
+    const tooltip = new Tooltip(document.getElementById('main-canvas'));
+
+    tooltip.content(<div>Hello <b>Tooltip</b>!</div>);
+  </script>
+</body>

@@ -37,9 +37,9 @@ new Tooltip(<containerDomElement>, { configOptions })
 
 ### Methods
 
-| Method | Description | Default |
-| --- | --- | --- |
-| <b>content</b>([<i>string | HTMLElement</i>]) | Specify the content of the tooltip. Supports plain text, HTML string content or an [HTML element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement). If a falsy value is supplied the tooltip will automatically hide. | `false` |
+| Method | Description | Default                                                                                                                                                                                                                                           |
+| --- | --- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <b>content</b>([<i>string | HTMLElement</i>]) | Specify the content of the tooltip. Supports plain text, HTML string content, an [HTML element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) or [React JSX](https://react.dev/learn/writing-markup-with-jsx). If a falsy value is supplied the tooltip will automatically hide. | `false` |
 
 ## Giving Back
 

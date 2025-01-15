@@ -1,6 +1,7 @@
 import { select as d3Select, pointer as d3Pointer } from 'd3-selection';
-
 import Kapsule from 'kapsule';
+
+import { render as reactRender, isReactRenderable } from './jsx-render';
 
 import './index.css';
 
@@ -57,11 +58,19 @@ export default Kapsule({
   update: function(state) {
     state.tooltipEl.style('display', !!state.content && state.mouseInside ? 'inline' : 'none');
 
-    if (state.content instanceof HTMLElement) {
+    if (!state.content) {
+      state.tooltipEl.text('');
+    } else if (state.content instanceof HTMLElement) {
       state.tooltipEl.text(''); // empty it
       state.tooltipEl.append(() => state.content);
+    } else if (typeof state.content === 'string') {
+      state.tooltipEl.html(state.content);
+    } else if (isReactRenderable(state.content)) {
+      state.tooltipEl.text(''); // empty it
+      reactRender(state.content, state.tooltipEl.node());
     } else {
-      state.tooltipEl.html(state.content || '');
+      state.tooltipEl.style('display', 'none');
+      console.warn('Tooltip content is invalid, skipping.', state.content, state.content.toString());
     }
   }
 });
