@@ -17,4 +17,7 @@ const reactElement2VNode = el => {
 
 export const isReactRenderable = o => isValidElement(cloneElement(o));
 
-export const render = (jsx, domEl) => preactRender(reactElement2VNode(jsx), domEl);
+export const render = (jsx, domEl) => {
+  delete domEl.__k; // Wipe traces of previous preact renders
+  preactRender(reactElement2VNode(jsx), domEl);
+}
