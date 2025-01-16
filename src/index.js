@@ -7,7 +7,9 @@ import './index.css';
 
 export default Kapsule({
   props: {
-    content: { default: false }
+    content: { default: false },
+    offsetX: { triggerUpdate: false }, // null or number
+    offsetY: { triggerUpdate: false }, // null or number
   },
 
   init: function(domNode, state, { style = {}} = {}) {
@@ -35,23 +37,32 @@ export default Kapsule({
       const canvasWidth = domNode.offsetWidth;
       const canvasHeight = domNode.offsetHeight;
 
+      const translate = [
+        state.offsetX === null || isNaN(state.offsetX)
+          // auto: adjust horizontal position to not exceed canvas boundaries
+          ? `-${mousePos[0] / canvasWidth * 100}%`
+          : `calc(-50% + ${state.offsetX}px)`,
+        state.offsetY === null || isNaN(state.offsetY)
+          // auto: flip to above if near bottom
+          ? canvasHeight > 130 && (canvasHeight - mousePos[1] < 100) ? 'calc(-100% - 6px)' : '21px'
+          : state.offsetY < 0 ? `calc(-100% - ${Math.abs(state.offsetY)}px)` : `${state.offsetY}px`
+      ];
+
       state.tooltipEl
         .style('left', mousePos[0] + 'px')
         .style('top', mousePos[1] + 'px')
-        // adjust horizontal position to not exceed canvas boundaries
-        .style('transform', `translate(-${mousePos[0] / canvasWidth * 100}%, ${
-          // flip to above if near bottom
-          canvasHeight > 130 && (canvasHeight - mousePos[1] < 100) ? 'calc(-100% - 6px)' : '21px'
-        })`);
+        .style('transform', `translate(${translate.join(',')})`);
+
+      state.content && state.tooltipEl.style('display', 'inline');
     });
 
     el.on('mouseover.tooltip', () => {
       state.mouseInside = true;
-      state.content && state.tooltipEl.style('display', 'inline')
+      state.content && state.tooltipEl.style('display', 'inline');
     });
     el.on('mouseout.tooltip', () => {
       state.mouseInside = false;
-      state.tooltipEl.style('display', 'none')
+      state.tooltipEl.style('display', 'none');
     });
   },
 

@@ -40,6 +40,8 @@ new Tooltip(<containerDomElement>, { configOptions })
 | Method | Description | Default                                                                                                                                                                                                                                           |
 | --- | --- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <b>content</b>([<i>string | HTMLElement</i>]) | Specify the content of the tooltip. Supports plain text, HTML string content, an [HTML element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) or [React JSX](https://react.dev/learn/writing-markup-with-jsx). If a falsy value is supplied the tooltip will automatically hide. | `false` |
+| <b>offsetX</b>([<i>number</i>]) | The amount of pixels to offset the tooltip horizontally from its center position relative to the pointer. If a `null` value is specified (default) the offset will be automatically calculated and gradually shifted so it remains horizontally inside the parent element. | - |
+| <b>offsetY</b>([<i>number</i>]) | The amount of pixels to offset the tooltip vertically relative to the pointer. A negative value will shift the tooltip to be above the pointer. If a `null` value is specified (default) the tooltip will be flipped above when the pointer is near the bottom, so it remains vertically inside the parent element. | - |
 
 ## Giving Back
 

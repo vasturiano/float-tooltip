@@ -9,6 +9,10 @@ declare class Tooltip {
 
   content(): string | boolean;
   content(content: HTMLElement | ReactHTMLElement<HTMLElement> | string | boolean | null): Tooltip;
+  offsetX(): number | null;
+  offsetX(offset: number | null): Tooltip;
+  offsetY(): number | null;
+  offsetY(offset: number | null): Tooltip;
 }
 
 export default Tooltip;
