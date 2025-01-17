@@ -42,11 +42,13 @@ export default Kapsule({
         state.offsetX === null || state.offsetX === undefined
           // auto: adjust horizontal position to not exceed canvas boundaries
           ? `-${mousePos[0] / canvasWidth * 100}%`
-          : typeof state.offsetX === number ? `calc(-50% + ${state.offsetX}px)` : state.offsetX,
+          : typeof state.offsetX === 'number'
+            ? `calc(-50% + ${state.offsetX}px)`
+            : state.offsetX,
         state.offsetY === null || state.offsetY === undefined
           // auto: flip to above if near bottom
           ? canvasHeight > 130 && (canvasHeight - mousePos[1] < 100) ? 'calc(-100% - 6px)' : '21px'
-          : typeof state.offsetY === number
+          : typeof state.offsetY === 'number'
             ? state.offsetY < 0 ? `calc(-100% - ${Math.abs(state.offsetY)}px)` : `${state.offsetY}px`
             : state.offsetY
       ];
