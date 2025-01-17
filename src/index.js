@@ -27,8 +27,9 @@ export default Kapsule({
       .style('left', '-10000px')
       .style('display', 'none');
 
+    const evSuffix = `tooltip-${Math.round(Math.random() * 1e12)}`;
     state.mouseInside = false;
-    el.on('mousemove.tooltip', function(ev) {
+    el.on(`mousemove.${evSuffix}`, function(ev) {
       state.mouseInside = true;
 
       const mousePos = d3Pointer(ev);
@@ -56,11 +57,11 @@ export default Kapsule({
       state.content && state.tooltipEl.style('display', 'inline');
     });
 
-    el.on('mouseover.tooltip', () => {
+    el.on(`mouseover.${evSuffix}`, () => {
       state.mouseInside = true;
       state.content && state.tooltipEl.style('display', 'inline');
     });
-    el.on('mouseout.tooltip', () => {
+    el.on(`mouseout.${evSuffix}`, () => {
       state.mouseInside = false;
       state.tooltipEl.style('display', 'none');
     });
