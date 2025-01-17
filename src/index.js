@@ -39,14 +39,16 @@ export default Kapsule({
       const canvasHeight = domNode.offsetHeight;
 
       const translate = [
-        state.offsetX === null || isNaN(state.offsetX)
+        state.offsetX === null || state.offsetX === undefined
           // auto: adjust horizontal position to not exceed canvas boundaries
           ? `-${mousePos[0] / canvasWidth * 100}%`
-          : `calc(-50% + ${state.offsetX}px)`,
-        state.offsetY === null || isNaN(state.offsetY)
+          : typeof state.offsetX === number ? `calc(-50% + ${state.offsetX}px)` : state.offsetX,
+        state.offsetY === null || state.offsetY === undefined
           // auto: flip to above if near bottom
           ? canvasHeight > 130 && (canvasHeight - mousePos[1] < 100) ? 'calc(-100% - 6px)' : '21px'
-          : state.offsetY < 0 ? `calc(-100% - ${Math.abs(state.offsetY)}px)` : `${state.offsetY}px`
+          : typeof state.offsetY === number
+            ? state.offsetY < 0 ? `calc(-100% - ${Math.abs(state.offsetY)}px)` : `${state.offsetY}px`
+            : state.offsetY
       ];
 
       state.tooltipEl
