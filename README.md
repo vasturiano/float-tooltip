@@ -14,7 +14,7 @@ import Tooltip from 'float-tooltip';
 ```
 or using a *script* tag
 ```html
-<script src="//unpkg.com/float-tooltip"></script>
+<script src="//cdn.jsdelivr.net/npm/float-tooltip"></script>
 ```
 then
 ```js
