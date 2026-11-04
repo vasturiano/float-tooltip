@@ -13,6 +13,8 @@ declare class Tooltip {
   offsetX(offset: number | string | null): Tooltip;
   offsetY(): number | string | null;
   offsetY(offset: number | string | null): Tooltip;
+
+  positionFromEvent(event: MouseEvent): Tooltip;
 }
 
 export default Tooltip;

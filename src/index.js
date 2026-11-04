@@ -12,29 +12,10 @@ export default Kapsule({
     offsetY: { triggerUpdate: false }, // null or number
   },
 
-  init: function(domNode, state, { style = {}} = {}) {
-    const isD3Selection = !!domNode && typeof domNode === 'object' && !!domNode.node && typeof domNode.node === 'function';
-    const el = d3Select(isD3Selection ? domNode.node() : domNode);
-
-    // make sure container is positioned, to provide anchor for tooltip
-    el.style('position') === 'static' && el.style('position', 'relative');
-
-    state.tooltipEl = el.append('div')
-      .attr('class', 'float-tooltip-kap');
-
-    Object.entries(style).forEach(([k, v]) => state.tooltipEl.style(k, v));
-    state.tooltipEl // start off-screen
-      .style('left', '-10000px')
-      .style('display', 'none');
-
-    const evSuffix = `tooltip-${Math.round(Math.random() * 1e12)}`;
-    state.mouseInside = false;
-    el.on(`mousemove.${evSuffix}`, function(ev) {
-      state.mouseInside = true;
-
-      const mousePos = d3Pointer(ev);
-
-      const domNode = el.node();
+  methods: {
+    positionFromEvent(state, ev) {
+      const domNode = state.container;
+      const mousePos = d3Pointer(ev, domNode);
       const canvasWidth = domNode.offsetWidth;
       const canvasHeight = domNode.offsetHeight;
 
@@ -58,6 +39,31 @@ export default Kapsule({
         .style('top', mousePos[1] + 'px')
         .style('transform', `translate(${translate.join(',')})`);
 
+      return this;
+    }
+  },
+
+  init: function(domNode, state, { style = {}} = {}) {
+    const isD3Selection = !!domNode && typeof domNode === 'object' && !!domNode.node && typeof domNode.node === 'function';
+    const el = d3Select(isD3Selection ? domNode.node() : domNode);
+    state.container = el.node();
+
+    // make sure container is positioned, to provide anchor for tooltip
+    el.style('position') === 'static' && el.style('position', 'relative');
+
+    state.tooltipEl = el.append('div')
+      .attr('class', 'float-tooltip-kap');
+
+    Object.entries(style).forEach(([k, v]) => state.tooltipEl.style(k, v));
+    state.tooltipEl // start off-screen
+      .style('left', '-10000px')
+      .style('display', 'none');
+
+    const evSuffix = `tooltip-${Math.round(Math.random() * 1e12)}`;
+    state.mouseInside = false;
+    el.on(`mousemove.${evSuffix}`, ev => {
+      state.mouseInside = true;
+      this.positionFromEvent(ev);
       state.content && state.tooltipEl.style('display', 'inline');
     });
 
